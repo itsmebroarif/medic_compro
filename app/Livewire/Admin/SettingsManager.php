@@ -32,15 +32,13 @@ class SettingsManager extends Component
         // Sosial Media
         'facebook' => '',
         'instagram' => '',
-        'twitter' => '',
-        'linkedin' => '',
-        'youtube' => '',
+        'tiktok' => '',
     ];
 
     private const GROUPS = [
         'general' => ['label' => 'Umum', 'keys' => ['hospital_name', 'tagline', 'about_short', 'about', 'meta_description']],
         'contact' => ['label' => 'Kontak & Lokasi', 'keys' => ['igd_phone', 'phone', 'whatsapp', 'email', 'address', 'hours', 'maps_embed']],
-        'social' => ['label' => 'Sosial Media', 'keys' => ['facebook', 'instagram', 'twitter', 'linkedin', 'youtube']],
+        'social' => ['label' => 'Sosial Media', 'keys' => ['facebook', 'instagram', 'tiktok']],
     ];
 
     public function mount(): void
@@ -80,9 +78,7 @@ class SettingsManager extends Component
             'settings.maps_embed' => ['nullable', 'string', 'max:2000'],
             'settings.facebook' => ['nullable', 'string', 'max:255'],
             'settings.instagram' => ['nullable', 'string', 'max:255'],
-            'settings.twitter' => ['nullable', 'string', 'max:255'],
-            'settings.linkedin' => ['nullable', 'string', 'max:255'],
-            'settings.youtube' => ['nullable', 'string', 'max:255'],
+            'settings.tiktok' => ['nullable', 'string', 'max:255'],
         ];
     }
 

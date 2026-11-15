@@ -46,7 +46,7 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label" for="s-igd">Nomor IGD 24 Jam</label>
-                            <input id="s-igd" type="text" class="form-control" wire:model="settings.igd_phone" placeholder="021 5550 1234">
+                            <input id="s-igd" type="text" class="form-control" wire:model="settings.igd_phone" placeholder="0858 1704 8266">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="s-phone">Telepon</label>
@@ -54,7 +54,7 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="s-wa">WhatsApp <span class="text-muted">(62xxx)</span></label>
-                            <input id="s-wa" type="text" class="form-control" wire:model="settings.whatsapp" placeholder="6281234567890">
+                            <input id="s-wa" type="text" class="form-control" wire:model="settings.whatsapp" placeholder="6285817048266">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="s-email">Email</label>
@@ -92,17 +92,9 @@
                         <label class="form-label" for="s-ig"><i class="bi bi-instagram text-danger"></i> Instagram</label>
                         <input id="s-ig" type="url" class="form-control" wire:model="settings.instagram" placeholder="https://instagram.com/...">
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="s-tw"><i class="bi bi-twitter"></i> Twitter / X</label>
-                        <input id="s-tw" type="url" class="form-control" wire:model="settings.twitter" placeholder="https://twitter.com/...">
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" for="s-li"><i class="bi bi-linkedin text-primary"></i> LinkedIn</label>
-                        <input id="s-li" type="url" class="form-control" wire:model="settings.linkedin" placeholder="https://linkedin.com/company/...">
-                    </div>
                     <div class="mb-0">
-                        <label class="form-label" for="s-yt"><i class="bi bi-youtube text-danger"></i> YouTube</label>
-                        <input id="s-yt" type="url" class="form-control" wire:model="settings.youtube" placeholder="https://youtube.com/@...">
+                        <label class="form-label" for="s-tt"><i class="bi bi-tiktok"></i> TikTok</label>
+                        <input id="s-tt" type="url" class="form-control" wire:model="settings.tiktok" placeholder="https://tiktok.com/@...">
                     </div>
                 </div>
                 <div class="card-footer"><button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Simpan Sosial Media</button></div>

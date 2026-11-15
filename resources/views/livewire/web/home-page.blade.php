@@ -4,20 +4,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-xl-7">
-                    <span class="hero-badge"><i class="fas fa-shield-alt"></i> Terakreditasi KARS &middot; Kerja Sama BPJS &amp; Asuransi</span>
-                    <p class="banner-one__sub-title" style="color: #2dd4bf; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">IGD 24 Jam</p>
+                    <span class="hero-badge"><i class="fas fa-shield-alt"></i> {{ $this->c['hero_badge'] }}</span>
+                    <p class="banner-one__sub-title" style="color: #2dd4bf; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">{{ $this->c['hero_kicker'] }}</p>
                     <h1 class="banner-one__title" style="color: #fff; font-size: 2.9rem; font-weight: 800;">
-                        Kesehatan Anda,<br><span style="color: #2dd4bf;">Prioritas Kami</span>
+                        {{ $this->c['hero_title_1'] }}<br><span style="color: #2dd4bf;">{{ $this->c['hero_title_2'] }}</span>
                     </h1>
                     <p class="banner-one__text" style="color: rgba(255,255,255,.88); margin: 18px 0 28px; font-size: 1.08rem; max-width: 560px;">
-                        {{ \App\Domains\Content\Models\SiteSetting::get('tagline', 'Layanan kesehatan terpadu: rawat jalan, rawat inap, poliklinik spesialis, dan IGD 24 jam.') }}
+                        {{ $this->c['hero_subtitle'] }}
                     </p>
                     <div class="d-flex flex-wrap gap-3">
                         <a href="{{ route('appointment') }}" wire:navigate class="thm-btn">
                             <span class="fas fa-calendar-check"></span>
-                            Janji Temu Online
+                            {{ $this->c['hero_cta_primary'] }}
                         </a>
-                        <a href="tel:{{ preg_replace('/\D/', '', $this->stats['igd']) }}" class="thm-btn" style="background: #dc2626;">
+                        <a href="tel:{{ preg_replace('/\D/', '', $this->stats['igd']) }}" class="thm-btn thm-btn--danger">
                             <span class="fas fa-ambulance"></span>
                             IGD: {{ $this->stats['igd'] }}
                         </a>
@@ -31,17 +31,12 @@
     <section style="padding: 54px 0 10px;">
         <div class="container">
             <div class="row g-3">
-                @foreach ([
-                    ['fas fa-award', 'Terakreditasi Paripurna', 'Standar mutu &amp; keselamatan pasien tertinggi (KARS).'],
-                    ['fas fa-user-md', 'Dokter Spesialis', 'Tenaga medis berpengalaman &amp; tersertifikasi.'],
-                    ['fas fa-ambulance', 'IGD 24 Jam', 'Tim gawat darurat siaga setiap saat.'],
-                    ['fas fa-file-invoice-dollar', 'BPJS &amp; Asuransi', 'Kerja sama BPJS Kesehatan &amp; asuransi swasta.'],
-                ] as [$icon, $title, $text])
+                @foreach (['usp1', 'usp2', 'usp3', 'usp4'] as $key)
                     <div class="col-6 col-lg-3">
                         <div class="usp-card">
-                            <div class="usp-icon"><i class="{{ $icon }}"></i></div>
-                            <h6 style="font-weight: 700; margin-bottom: 6px;">{{ $title }}</h6>
-                            <p class="text-muted small mb-0">{!! $text !!}</p>
+                            <div class="usp-icon"><i class="{{ $this->c[$key.'_icon'] }}"></i></div>
+                            <h6 style="font-weight: 700; margin-bottom: 6px;">{{ $this->c[$key.'_title'] }}</h6>
+                            <p class="text-muted small mb-0">{{ $this->c[$key.'_text'] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -96,22 +91,23 @@
         <div class="container">
             <div class="row g-4 align-items-center" style="background: #f6fbff; border-radius: 20px; overflow: hidden;">
                 <div class="col-lg-6">
-                    <img src="{{ asset('generated/ward.jpg') }}" alt="Kamar rawat inap RS Medika Service" style="width: 100%; height: 100%; min-height: 320px; object-fit: cover;">
+                    <img src="{{ asset('generated/ward.jpg') }}" alt="Kamar rawat inap RS Medika Service" style="width: 100%; aspect-ratio: 16/10; object-fit: cover; height: auto; min-height: 0;">
                 </div>
                 <div class="col-lg-6" style="padding: 40px 34px;">
                     <div class="section-title text-left" style="margin-bottom: 14px;">
                         <div class="section-title__tagline-box">
-                            <p class="section-title__tagline">Fasilitas Rawat Inap</p>
+                            <p class="section-title__tagline">{{ $this->c['ward_kicker'] }}</p>
                         </div>
-                        <h2 class="section-title__title" style="font-size: 1.9rem;">Ruangan Nyaman,<br><span>Pemulihan Lebih Cepat</span></h2>
+                        <h2 class="section-title__title" style="font-size: 1.9rem;">{{ $this->c['ward_title_1'] }}<br><span>{{ $this->c['ward_title_2'] }}</span></h2>
                     </div>
                     <ul class="list-unstyled" style="line-height: 2.15;">
-                        <li><span class="fas fa-check-circle text-success"></span> VIP &amp; Kelas 1–3, ICU, NICU &amp; Ruang Isolasi</li>
-                        <li><span class="fas fa-check-circle text-success"></span> Perawat 24 jam &amp; kunjungan dokter DPJP terjadwal</li>
-                        <li><span class="fas fa-check-circle text-success"></span> Perlengkapan lengkap &amp; nurse call di setiap kamar</li>
-                        <li><span class="fas fa-check-circle text-success"></span> Kantin &amp; apotek 24 jam di dalam area RS</li>
+                        @foreach (preg_split('/\r\n|\r|\n/', trim($this->c['ward_bullets'])) as $bullet)
+                            @if (trim($bullet) !== '')
+                                <li><span class="fas fa-check-circle text-success"></span> {{ trim($bullet) }}</li>
+                            @endif
+                        @endforeach
                     </ul>
-                    <a href="{{ route('contact') }}" wire:navigate class="thm-btn"><span class="fas fa-bed"></span> Tanyakan Kamar Tersedia</a>
+                    <a href="{{ route('contact') }}" wire:navigate class="thm-btn"><span class="fas fa-bed"></span> {{ $this->c['ward_button'] }}</a>
                 </div>
             </div>
         </div>
@@ -131,8 +127,8 @@
                     <div class="col-xl-3 col-lg-6 col-md-6">
                         <div class="team-two__single">
                             <div class="team-two__img-box">
-                                <div class="team-two__img" style="height: 280px; overflow: hidden;">
-                                    <img src="{{ $doctor->photoUrl() ?? asset('generated/doctor-placeholder.png') }}" alt="{{ $doctor->name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; object-position: center 18%;">
+                                <div class="team-two__img" style="aspect-ratio: 4/5; overflow: hidden;">
+                                    <img src="{{ $doctor->photoUrl() ?? asset('generated/doctor-placeholder.png') }}" alt="{{ $doctor->name }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; object-position: center top;">
                                 </div>
                             </div>
                             <div class="team-two__content">
@@ -154,14 +150,14 @@
         <div class="container">
             <div class="row text-center g-4">
                 @foreach ([
-                    [$this->stats['doctors'] . '+', 'Dokter Spesialis &amp; Subspesialis'],
-                    [$this->stats['departments'], 'Poliklinik &amp; Layanan'],
-                    [number_format($this->stats['patients']) . '+', 'Pasien Terdaftar'],
-                    ['24/7', 'IGD &amp; Rawat Inap Siaga'],
+                    [$this->stats['doctors'] . '+', $this->c['stat_1_label']],
+                    [$this->stats['departments'], $this->c['stat_2_label']],
+                    [number_format($this->stats['patients']) . '+', $this->c['stat_3_label']],
+                    ['24/7', $this->c['stat_4_label']],
                 ] as [$num, $label])
                     <div class="col-6 col-lg-3">
                         <div class="stat-num">{!! $num !!}</div>
-                        <div class="stat-label">{!! $label !!}</div>
+                        <div class="stat-label">{{ $label }}</div>
                     </div>
                 @endforeach
             </div>
@@ -184,7 +180,7 @@
                         <div class="col-xl-4 col-lg-6 col-md-6">
                             <div class="blog-one__single">
                                 <div class="blog-one__img">
-                                    <img src="{{ $article->thumbnailUrl() ?? asset($fallback) }}" alt="{{ $article->title }}" loading="lazy" style="height: 210px; object-fit: cover;">
+                                    <img src="{{ $article->thumbnailUrl() ?? asset($fallback) }}" alt="{{ $article->title }}" loading="lazy" style="width: 100%; aspect-ratio: 16/10; object-fit: cover;">
                                 </div>
                                 <div class="blog-one__content">
                                     <div class="blog-one__content-inner">
@@ -214,13 +210,13 @@
         <div class="container">
             <div class="emergency-band">
                 <div class="d-flex align-items-center gap-3">
-                    <i class="fas fa-ambulance" style="font-size: 3rem; opacity: .9;"></i>
+                    <span class="emergency-icon"><i class="fas fa-ambulance"></i></span>
                     <div>
-                        <h3 style="color: #fff; margin: 0 0 4px; font-size: 1.5rem;">Kondisi Gawat Darurat?</h3>
-                        <p style="margin: 0; opacity: .92;">IGD kami siaga 24 jam — dokter &amp; perawat gawat darurat tersedia setiap saat.</p>
+                        <h3 style="color: #fff; margin: 0 0 4px; font-size: 1.5rem;">{{ $this->c['emergency_title'] }}</h3>
+                        <p style="margin: 0; opacity: .92;">{{ $this->c['emergency_text'] }}</p>
                     </div>
                 </div>
-                <a href="tel:{{ preg_replace('/\D/', '', $this->stats['igd']) }}" class="btn btn-light btn-lg" style="font-weight: 800; color: #b91c1c; border-radius: 100px; padding: 12px 28px;">
+                <a href="tel:{{ preg_replace('/\D/', '', $this->stats['igd']) }}" class="thm-btn thm-btn--white" style="font-weight: 800;">
                     <i class="fas fa-phone-alt"></i> {{ $this->stats['igd'] }}
                 </a>
             </div>
@@ -245,8 +241,8 @@
                         <ul class="list-unstyled" style="line-height: 2.2; margin-bottom: 6px;">
                             <li><i class="fas fa-clock text-primary"></i> {{ \App\Domains\Content\Models\SiteSetting::get('hours', 'Senin–Sabtu 08.00–20.00 WIB') }}</li>
                             <li><i class="fas fa-ambulance text-danger"></i> IGD 24 Jam: <a href="tel:{{ preg_replace('/\D/', '', $this->stats['igd']) }}" style="color: inherit; font-weight: 700;">{{ $this->stats['igd'] }}</a></li>
-                            <li><i class="fas fa-phone text-primary"></i> Telepon: {{ \App\Domains\Content\Models\SiteSetting::get('phone', '021 5550 1235') }}</li>
-                            <li><i class="fab fa-whatsapp text-success"></i> WhatsApp: {{ \App\Domains\Content\Models\SiteSetting::get('whatsapp', '6281234567890') }}</li>
+                            <li><i class="fas fa-phone text-primary"></i> Telepon: {{ \App\Domains\Content\Models\SiteSetting::get('phone', '0858 1704 8266') }}</li>
+                            <li><i class="fab fa-whatsapp text-success"></i> WhatsApp: {{ \App\Domains\Content\Models\SiteSetting::get('whatsapp', '6285817048266') }}</li>
                         </ul>
                         <a href="{{ route('contact') }}" wire:navigate class="btn btn-outline-primary"><i class="fas fa-paper-plane"></i> Kirim Pesan ke Kami</a>
                     </div>

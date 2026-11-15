@@ -15,9 +15,9 @@
                         <h4 style="font-weight: 700;">Informasi Kontak</h4>
                         <ul class="list-unstyled" style="line-height: 2.1;">
                             <li><i class="fas fa-map-marker-alt text-primary"></i> {{ SiteSetting::get('address', 'Jl. Kesehatan Raya No. 1, Jakarta') }}</li>
-                            <li><i class="fas fa-phone-alt text-danger"></i> <strong>IGD 24 Jam: <a href="tel:{{ preg_replace('/\D/', '', SiteSetting::get('igd_phone', '02155501234')) }}" style="color: inherit; text-decoration: none;">{{ SiteSetting::get('igd_phone', '021 5550 1234') }}</a></strong></li>
-                            <li><i class="fas fa-phone text-primary"></i> Telepon: {{ SiteSetting::get('phone', '021 5550 1235') }}</li>
-                            <li><i class="fab fa-whatsapp text-success"></i> WhatsApp: {{ SiteSetting::get('whatsapp', '6281234567890') }}</li>
+                            <li><i class="fas fa-phone-alt text-danger"></i> <strong>IGD 24 Jam: <a href="tel:{{ preg_replace('/\D/', '', SiteSetting::get('igd_phone', '085817048266')) }}" style="color: inherit; text-decoration: none;">{{ SiteSetting::get('igd_phone', '0858 1704 8266') }}</a></strong></li>
+                            <li><i class="fas fa-phone text-primary"></i> Telepon: {{ SiteSetting::get('phone', '0858 1704 8266') }}</li>
+                            <li><i class="fab fa-whatsapp text-success"></i> WhatsApp: {{ SiteSetting::get('whatsapp', '6285817048266') }}</li>
                             <li><i class="fas fa-envelope text-primary"></i> {{ SiteSetting::get('email', 'info@medicservice.co.id') }}</li>
                             <li><i class="fas fa-clock text-primary"></i> {{ SiteSetting::get('hours', 'Senin–Sabtu, 08.00–20.00 WIB (IGD 24 Jam)') }}</li>
                         </ul>
@@ -26,7 +26,7 @@
                                 <iframe src="{{ SiteSetting::get('maps_embed') }}" width="100%" height="220" style="border: 0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Lokasi Rumah Sakit"></iframe>
                             </div>
                         @else
-                            <img src="{{ asset('generated/about-reception.jpg') }}" alt="Resepsionis RS Medika Service" style="width: 100%; border-radius: 12px; object-fit: cover; max-height: 220px;">
+                            <img src="{{ asset('generated/about-reception.jpg') }}" alt="Resepsionis RS Medika Service" style="width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 12px;">
                         @endif
                     </div>
                 </div>

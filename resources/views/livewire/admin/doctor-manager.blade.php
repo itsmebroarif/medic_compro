@@ -22,7 +22,7 @@
                 <tbody>
                     @forelse ($doctors as $doctor)
                         <tr>
-                            <td><img src="{{ $doctor->photoUrl() ?? asset('generated/doctor-placeholder.png') }}" alt="{{ $doctor->name }}" style="width: 56px; height: 56px; object-fit: cover; border-radius: 50%;"></td>
+                            <td><img src="{{ $doctor->photoUrl() ?? asset('generated/doctor-placeholder.png') }}" alt="{{ $doctor->name }}" style="width: 45px; aspect-ratio: 4/5; object-fit: cover; object-position: center top; border-radius: 8px;"></td>
                             <td><strong>{{ $doctor->name }}</strong></td>
                             <td>{{ $doctor->department?->name }}</td>
                             <td>{{ $doctor->sip_number ?: '-' }}</td>

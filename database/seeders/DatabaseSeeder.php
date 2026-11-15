@@ -59,23 +59,24 @@ class DatabaseSeeder extends Seeder
             'about_short' => 'Melayani dengan sepenuh hati, profesional, dan terpercaya untuk kesehatan Anda dan keluarga.',
             'about' => 'RS Medika Service adalah rumah sakit umum swasta yang berkomitmen memberikan pelayanan kesehatan paripurna: rawat jalan, rawat inap, poliklinik spesialis, laboratorium, radiologi, farmasi 24 jam, dan instalasi gawat darurat (IGD) yang siaga setiap saat.',
             'meta_description' => 'RS Medika Service - Rumah sakit dengan layanan rawat jalan, rawat inap, poliklinik spesialis, dan IGD 24 jam di Jakarta.',
-            'igd_phone' => '021 5550 1234',
-            'phone' => '021 5550 1235',
-            'whatsapp' => '6281234567890',
-            'email' => 'info@medicservice.co.id',
+            'igd_phone' => '0858 1704 8266',
+            'phone' => '0858 1704 8266',
+            'whatsapp' => '6285817048266',
+            'email' => 'aripstrike@gmail.com',
             'address' => 'Jl. Kesehatan Raya No. 1, Jakarta Selatan 12140',
             'hours' => 'Senin–Sabtu, 08.00–20.00 WIB (IGD 24 Jam)',
             'maps_embed' => 'https://www.google.com/maps?q=RS%20Jakarta&output=embed',
             'facebook' => 'https://facebook.com/rsmedikaservice',
             'instagram' => 'https://instagram.com/rsmedikaservice',
-            'twitter' => 'https://twitter.com/rsmedikaservice',
-            'linkedin' => 'https://linkedin.com/company/rsmedikaservice',
-            'youtube' => 'https://youtube.com/@rsmedikaservice',
+            'tiktok' => 'https://tiktok.com/@rsmedikaservice',
         ];
 
         foreach ($settings as $key => $value) {
-            SiteSetting::set($key, $value, str_starts_with($key, 'igd') || in_array($key, ['phone', 'whatsapp', 'email', 'address', 'hours', 'maps_embed'], true) ? 'contact' : (in_array($key, ['facebook', 'instagram', 'twitter', 'linkedin', 'youtube'], true) ? 'social' : 'general'));
+            SiteSetting::set($key, $value, str_starts_with($key, 'igd') || in_array($key, ['phone', 'whatsapp', 'email', 'address', 'hours', 'maps_embed'], true) ? 'contact' : (in_array($key, ['facebook', 'instagram', 'tiktok'], true) ? 'social' : 'general'));
         }
+
+        // Hapus pengaturan lama yang tidak dipakai lagi
+        SiteSetting::query()->whereIn('key', ['twitter', 'linkedin', 'youtube'])->delete();
 
         // ===== 4. Departemen =====
         $departmentData = [
@@ -315,7 +316,7 @@ class DatabaseSeeder extends Seeder
             $doctor = Doctor::query()->where('name', $name)->whereNull('photo')->first();
             $source = public_path('generated/doctors/'.$file);
             if ($doctor && is_file($source)) {
-                $doctor->update(['photo' => $media->storeAsWebp(new UploadedFile($source, $file, 'image/jpeg', null, true), 'doctors', maxWidth: 800, quality: 82)]);
+                $doctor->update(['photo' => $media->storeAsWebpCropped(new UploadedFile($source, $file, 'image/jpeg', null, true), 'doctors', 480, 600, quality: 82)]);
             }
         }
 
@@ -332,7 +333,7 @@ class DatabaseSeeder extends Seeder
             $article = Article::query()->where('title', $title)->whereNull('thumbnail')->first();
             $source = public_path('generated/articles/'.$file);
             if ($article && is_file($source)) {
-                $article->update(['thumbnail' => $media->storeAsWebp(new UploadedFile($source, $file, 'image/jpeg', null, true), 'articles', maxWidth: 1400, quality: 80)]);
+                $article->update(['thumbnail' => $media->storeAsWebpCropped(new UploadedFile($source, $file, 'image/jpeg', null, true), 'articles', 880, 550, quality: 80)]);
             }
         }
     }

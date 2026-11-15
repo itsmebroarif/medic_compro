@@ -133,13 +133,13 @@ class ArticleManager extends Component
             $article = Article::query()->findOrFail($this->editingId);
             if ($this->thumbnail) {
                 $media->delete($article->thumbnail);
-                $data['thumbnail'] = $media->storeAsWebp($this->thumbnail, 'articles', maxWidth: 1400, quality: 80);
+                $data['thumbnail'] = $media->storeAsWebpCropped($this->thumbnail, 'articles', 880, 550, quality: 80);
             }
             $article->update($data);
             $this->flashMessage = 'Artikel berhasil diperbarui.';
         } else {
             if ($this->thumbnail) {
-                $data['thumbnail'] = $media->storeAsWebp($this->thumbnail, 'articles', maxWidth: 1400, quality: 80);
+                $data['thumbnail'] = $media->storeAsWebpCropped($this->thumbnail, 'articles', 880, 550, quality: 80);
             }
             Article::query()->create($data);
             $this->flashMessage = 'Artikel berhasil ditambahkan.';

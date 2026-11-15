@@ -21,7 +21,7 @@ class UpsertDoctorAction
 
             if ($photo) {
                 $this->media->delete($doctor?->photo);
-                $attributes['photo'] = $this->media->storeAsWebp($photo, 'doctors', maxWidth: 800, quality: 82);
+                $attributes['photo'] = $this->media->storeAsWebpCropped($photo, 'doctors', 480, 600, quality: 82);
             }
 
             if ($doctor) {

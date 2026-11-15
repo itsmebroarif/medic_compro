@@ -32,7 +32,8 @@ Dikembangkan dengan **Laravel 13 + PHP 8.5**, **Livewire 4 (SPA Mode `wire:navig
   - **Artikel/Berita** dengan editor **WYSIWYG** (Summernote), thumbnail WebP, auto-slug, status Draft/Published + jadwal terbit,
   - **Kategori Artikel**,
   - **Halaman Web** — editor WYSIWYG untuk halaman statis situs.
-- **Pengaturan** — identitas RS (nama, tagline, tentang), kontak & IGD, Google Maps embed, sosial media; tersimpan permanen di cache dan otomatis ter-*invalidate* saat diubah.
+- **Konten Website (CMS)** — seluruh teks & kartu di halaman **Beranda** (hero, badge, USP, section rawat inap, label statistik, CTA darurat) dan **Tentang** (visi, misi, statistik) bisa diedit langsung dari menu **Konten Website** — tanpa menyentuh kode.
+- **Pengaturan** — identitas RS (nama, tagline, tentang), kontak & IGD (**0858 1704 8266**, **aripstrike@gmail.com**), Google Maps embed, sosial media (**Facebook, Instagram, TikTok**); tersimpan permanen di cache dan otomatis ter-*invalidate* saat diubah.
 - **Pengguna & Role** — manajemen akun admin + hak akses (super-admin, admin-pendaftaran, admin-konten).
 
 ### 👥 Hak Akses (Role)

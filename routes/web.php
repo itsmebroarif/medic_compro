@@ -45,6 +45,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function (): v
         Route::get('/artikel', Admin\ArticleManager::class)->name('articles');
         Route::get('/kategori-artikel', Admin\ArticleCategoryManager::class)->name('article-categories');
         Route::get('/halaman', Admin\PageManager::class)->name('pages');
+        Route::get('/konten-website', Admin\SiteContentManager::class)->name('site-content');
     });
 
     // Pengaturan Sistem (Super Admin saja)

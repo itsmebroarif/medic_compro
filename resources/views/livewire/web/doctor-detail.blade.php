@@ -12,7 +12,7 @@
                 <div class="col-lg-4">
                     <div class="card border-0 shadow-sm text-center" style="border-radius: 16px; padding: 24px;">
                         <div style="border-radius: 16px; overflow: hidden; margin-bottom: 16px;">
-                            <img src="{{ $doctor->photoUrl() ?? asset('generated/doctor-placeholder.png') }}" alt="{{ $doctor->name }}" style="width: 100%; height: 340px; object-fit: cover;">
+                            <img src="{{ $doctor->photoUrl() ?? asset('generated/doctor-placeholder.png') }}" alt="{{ $doctor->name }}" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center top; border-radius: 14px;">
                         </div>
                         <h4 style="font-weight: 700;">{{ $doctor->name }}</h4>
                         <p class="text-primary mb-1" style="font-weight: 600;">{{ $doctor->department->name }}</p>

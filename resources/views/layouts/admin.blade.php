@@ -162,6 +162,11 @@
                             <i class="nav-icon bi bi-file-earmark-richtext"></i><p>Halaman Web</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.site-content') }}" wire:navigate class="nav-link {{ request()->routeIs('admin.site-content') ? 'active' : '' }}">
+                            <i class="nav-icon bi bi-layout-text-window-reverse"></i><p>Konten Website</p>
+                        </a>
+                    </li>
                     @endhasanyrole
 
                     @role('super-admin')

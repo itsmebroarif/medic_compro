@@ -28,7 +28,7 @@
                     <div class="col-xl-4 col-lg-6 col-md-6">
                         <div class="blog-one__single">
                             <div class="blog-one__img">
-                                <img src="{{ $article->thumbnailUrl() ?? asset($fallback) }}" alt="{{ $article->title }}" loading="lazy">
+                                <img src="{{ $article->thumbnailUrl() ?? asset($fallback) }}" alt="{{ $article->title }}" loading="lazy" style="width: 100%; aspect-ratio: 16/10; object-fit: cover;">
                             </div>
                             <div class="blog-one__content">
                                 <div class="blog-one__content-inner">

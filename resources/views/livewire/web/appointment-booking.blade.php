@@ -165,8 +165,8 @@
                         <div class="card border-0 shadow-sm" style="border-radius: 16px; padding: 24px; margin-top: 20px;">
                             <h5 style="font-weight: 700;"><i class="fas fa-phone-alt text-danger"></i> Darurat?</h5>
                             <p class="text-muted mb-1">IGD 24 Jam</p>
-                            <a href="tel:{{ preg_replace('/\D/', '', \App\Domains\Content\Models\SiteSetting::get('igd_phone', '02155501234')) }}" class="fs-4" style="color: #dc3545; font-weight: 800; text-decoration: none;">
-                                {{ \App\Domains\Content\Models\SiteSetting::get('igd_phone', '021 5550 1234') }}
+                            <a href="tel:{{ preg_replace('/\D/', '', \App\Domains\Content\Models\SiteSetting::get('igd_phone', '085817048266')) }}" class="fs-4" style="color: #dc3545; font-weight: 800; text-decoration: none;">
+                                {{ \App\Domains\Content\Models\SiteSetting::get('igd_phone', '0858 1704 8266') }}
                             </a>
                             <hr>
                             <p class="small text-muted mb-0">Jam layanan poliklinik: Senin–Sabtu 08.00–20.00 WIB (sesuai jadwal dokter masing-masing).</p>

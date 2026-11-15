@@ -49,7 +49,7 @@
                         <div class="team-two__single">
                             <div class="team-two__img-box">
                                 <div class="team-two__img">
-                                    <img src="{{ $doctor->photoUrl() ?? asset('generated/doctor-placeholder.png') }}" alt="{{ $doctor->name }}" loading="lazy">
+                                    <img src="{{ $doctor->photoUrl() ?? asset('generated/doctor-placeholder.png') }}" alt="{{ $doctor->name }}" loading="lazy" style="width: 100%; aspect-ratio: 4/5; object-fit: cover; object-position: center top;">
                                 </div>
                             </div>
                             <div class="team-two__content">

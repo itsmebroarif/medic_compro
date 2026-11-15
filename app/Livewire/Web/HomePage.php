@@ -4,6 +4,7 @@ namespace App\Livewire\Web;
 
 use App\Domains\Content\Models\Article;
 use App\Domains\Content\Models\SiteSetting;
+use App\Domains\Content\Support\SiteContent;
 use App\Domains\MasterData\Models\Patient;
 use App\Domains\Medical\Models\Department;
 use App\Domains\Medical\Models\Doctor;
@@ -34,6 +35,13 @@ class HomePage extends Component
     public function latestArticles()
     {
         return Article::query()->published()->with('category')->latest('published_at')->take(3)->get();
+    }
+
+    /** @return array<string, string> */
+    #[Computed]
+    public function c(): array
+    {
+        return SiteContent::map();
     }
 
     #[Computed]

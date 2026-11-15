@@ -39,7 +39,7 @@
             '@type' => 'Hospital',
             'name' => $hospitalName,
             'address' => SiteSetting::get('address', 'Jl. Kesehatan Raya No. 1, Jakarta Selatan 12140'),
-            'telephone' => SiteSetting::get('igd_phone', '021 5550 1234'),
+            'telephone' => SiteSetting::get('igd_phone', '0858 1704 8266'),
             'url' => url('/'),
         ];
     @endphp
@@ -57,64 +57,60 @@
     <div class="page-wrapper">
 
         @persist('site-navbar')
-        <header class="main-header">
-            <nav class="main-menu">
-                <div class="main-menu__wrapper">
-                    <div class="container">
-                        <div class="main-menu__wrapper-inner">
-                            <div class="main-menu__logo">
-                                <a href="{{ route('home') }}" wire:navigate aria-label="{{ $hospitalName }}">
-                                    <img src="{{ asset('generated/logo-dark.png') }}" alt="{{ $hospitalName }}" style="height: 46px; width: auto;">
-                                </a>
-                            </div>
-                            <div class="main-menu__main-menu-box-outer">
-                                <div class="main-menu__main-menu-box-outer-top">
-                                    <ul class="list-unstyled main-menu__contact-list">
-                                        <li>
-                                            <div class="icon"><i class="icon-phone-call"></i></div>
-                                            <div class="text">
-                                                <p>IGD 24 Jam: <a href="tel:{{ preg_replace('/\D/', '', SiteSetting::get('igd_phone', '02155501234')) }}">{{ SiteSetting::get('igd_phone', '021 5550 1234') }}</a></p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="icon"><i class="icon-email"></i></div>
-                                            <div class="text">
-                                                <p><a href="mailto:{{ SiteSetting::get('email', 'info@medicservice.co.id') }}">{{ SiteSetting::get('email', 'info@medicservice.co.id') }}</a></p>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="main-menu__social">
-                                        @if(SiteSetting::get('facebook'))<a href="{{ SiteSetting::get('facebook') }}"><i class="icon-facebook-app-symbol"></i></a>@endif
-                                        @if(SiteSetting::get('twitter'))<a href="{{ SiteSetting::get('twitter') }}"><i class="icon-twitter"></i></a>@endif
-                                        @if(SiteSetting::get('instagram'))<a href="{{ SiteSetting::get('instagram') }}"><i class="icon-instagram"></i></a>@endif
-                                        @if(SiteSetting::get('linkedin'))<a href="{{ SiteSetting::get('linkedin') }}"><i class="icon-linkedin"></i></a>@endif
-                                    </div>
-                                </div>
-                                <div class="main-menu__main-menu-box-content">
-                                    <div class="main-menu__main-menu-box">
-                                        <a href="#" class="mobile-nav__toggler" aria-label="Buka menu"><i class="fa fa-bars"></i></a>
-                                        <ul class="main-menu__list">
-                                            <li><a href="{{ route('home') }}" wire:navigate>Beranda</a></li>
-                                            <li><a href="{{ route('about') }}" wire:navigate>Tentang</a></li>
-                                            <li><a href="{{ route('doctors.index') }}" wire:navigate>Dokter</a></li>
-                                            <li><a href="{{ route('articles.index') }}" wire:navigate>Artikel</a></li>
-                                            <li><a href="{{ route('contact') }}" wire:navigate>Kontak</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="main-menu__search-cart-btn-box">
-                                        <a href="{{ route('appointment') }}" wire:navigate class="thm-btn" style="padding: 12px 22px;">
-                                            <span class="fas fa-calendar-check"></span>
-                                            Janji Temu
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        @php
+            $navLinks = [
+                'home' => 'Beranda',
+                'about' => 'Tentang',
+                'doctors.index' => 'Dokter',
+                'articles.index' => 'Artikel',
+                'contact' => 'Kontak',
+            ];
+            $igdHref = 'tel:'.preg_replace('/\D/', '', SiteSetting::get('igd_phone', '085817048266'));
+        @endphp
+        <header class="rs-navbar">
+            <div class="container rs-navbar__inner">
+                <a class="rs-logo" href="{{ route('home') }}" wire:navigate aria-label="{{ $hospitalName }}">
+                    <img src="{{ asset('generated/logo-dark.png') }}" alt="{{ $hospitalName }}">
+                </a>
+
+                <nav class="rs-menu" aria-label="Menu utama">
+                    @foreach ($navLinks as $route => $label)
+                        <a href="{{ route($route) }}" wire:navigate @class(['active' => request()->routeIs($route)])>{{ $label }}</a>
+                    @endforeach
+                </nav>
+
+                <div class="rs-actions">
+                    <a class="rs-call" href="{{ $igdHref }}" aria-label="Telepon IGD">
+                        <span class="rs-call__icon"><i class="fas fa-phone-alt"></i></span>
+                        <span class="rs-call__text">
+                            <small>IGD 24 Jam</small>
+                            <strong>{{ SiteSetting::get('igd_phone', '0858 1704 8266') }}</strong>
+                        </span>
+                    </a>
+                    <a class="thm-btn thm-btn--sm" href="{{ route('appointment') }}" wire:navigate>
+                        <i class="fas fa-calendar-check"></i> Janji Temu
+                    </a>
+                    <button class="rs-burger" type="button" id="rsBurger" aria-label="Buka menu" aria-expanded="false" aria-controls="rsMobilePanel">
+                        <i class="fa fa-bars"></i>
+                    </button>
                 </div>
-            </nav>
+            </div>
+
+            {{-- Panel mobile --}}
+            <div class="rs-mobile-panel" id="rsMobilePanel" hidden>
+                <nav aria-label="Menu mobile">
+                    @foreach ($navLinks as $route => $label)
+                        <a class="rs-mlink @if(request()->routeIs($route)) active @endif" href="{{ route($route) }}" wire:navigate>
+                            {{ $label }} <i class="fas fa-chevron-right"></i>
+                        </a>
+                    @endforeach
+                </nav>
+                <div class="rs-mobile-cta">
+                    <a class="thm-btn" href="{{ route('appointment') }}" wire:navigate><i class="fas fa-calendar-check"></i> Janji Temu</a>
+                    <a class="thm-btn thm-btn--danger" href="{{ $igdHref }}"><i class="fas fa-phone-alt"></i> IGD 24 Jam</a>
+                </div>
+            </div>
         </header>
-        <div class="stricky-header stricked-menu main-menu"><div class="sticky-header__content"></div></div>
         @endpersist
 
         {{ $slot }}
@@ -132,11 +128,9 @@
                                     </div>
                                     <p class="footer-widget__about-text">{{ SiteSetting::get('about_short', 'Melayani dengan sepenuh hati, profesional, dan terpercaya untuk kesehatan Anda dan keluarga.') }}</p>
                                     <div class="footer-widget__social">
-                                        @if(SiteSetting::get('facebook'))<a href="{{ SiteSetting::get('facebook') }}" aria-label="Facebook"><i class="fab fa-facebook"></i></a>@endif
+                                        @if(SiteSetting::get('facebook'))<a href="{{ SiteSetting::get('facebook') }}" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>@endif
                                         @if(SiteSetting::get('instagram'))<a href="{{ SiteSetting::get('instagram') }}" aria-label="Instagram"><i class="fab fa-instagram"></i></a>@endif
-                                        @if(SiteSetting::get('twitter'))<a href="{{ SiteSetting::get('twitter') }}" aria-label="Twitter"><i class="fab fa-twitter"></i></a>@endif
-                                        @if(SiteSetting::get('linkedin'))<a href="{{ SiteSetting::get('linkedin') }}" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>@endif
-                                        @if(SiteSetting::get('youtube'))<a href="{{ SiteSetting::get('youtube') }}" aria-label="YouTube"><i class="fab fa-youtube"></i></a>@endif
+                                        @if(SiteSetting::get('tiktok'))<a href="{{ SiteSetting::get('tiktok') }}" aria-label="TikTok"><svg viewBox="0 0 448 512" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 0 1 185 512C106.44 512 42.65 448.21 42.65 369.69S106.44 227.32 185 227.32c14.5 0 28.41 2.55 41.42 7.24v87.27a79.23 79.23 0 0 0-41.42-12.33c-44.15 0-79.72 35.57-79.72 79.69s35.57 79.7 79.72 79.7 79.4-35.56 79.4-79.7V0h88.06a163.3 163.3 0 0 0 96.03 96.38V210.1a210.06 210.06 0 0 1-1.03-.18z"/></svg></a>@endif
                                     </div>
                                 </div>
                             </div>
@@ -176,11 +170,11 @@
                                                     </li>
                                                     <li>
                                                         <p>IGD 24 Jam</p>
-                                                        <h5><a href="tel:{{ preg_replace('/\D/', '', SiteSetting::get('igd_phone', '02155501234')) }}">{{ SiteSetting::get('igd_phone', '021 5550 1234') }}</a></h5>
+                                                        <h5><a href="tel:{{ preg_replace('/\D/', '', SiteSetting::get('igd_phone', '085817048266')) }}">{{ SiteSetting::get('igd_phone', '0858 1704 8266') }}</a></h5>
                                                     </li>
                                                     <li>
                                                         <p>Telepon / WhatsApp</p>
-                                                        <h5><a href="https://wa.me/{{ preg_replace('/\D/', '', SiteSetting::get('whatsapp', '6281234567890')) }}">{{ SiteSetting::get('phone', '021 5550 1235') }}</a></h5>
+                                                        <h5><a href="https://wa.me/{{ preg_replace('/\D/', '', SiteSetting::get('whatsapp', '6285817048266')) }}">{{ SiteSetting::get('phone', '0858 1704 8266') }}</a></h5>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -226,7 +220,7 @@
             </div>
             <ul class="mobile-nav__contact list-unstyled" style="padding: 0 30px;">
                 <li><i class="fa fa-envelope"></i><a href="mailto:{{ SiteSetting::get('email', 'info@medicservice.co.id') }}">{{ SiteSetting::get('email', 'info@medicservice.co.id') }}</a></li>
-                <li><i class="fas fa-phone"></i><a href="tel:{{ preg_replace('/\D/', '', SiteSetting::get('igd_phone', '02155501234')) }}">{{ SiteSetting::get('igd_phone', '021 5550 1234') }}</a></li>
+                <li><i class="fas fa-phone"></i><a href="tel:{{ preg_replace('/\D/', '', SiteSetting::get('igd_phone', '085817048266')) }}">{{ SiteSetting::get('igd_phone', '0858 1704 8266') }}</a></li>
             </ul>
             <ul class="list-unstyled" style="padding: 0 30px; line-height: 2.4; font-size: 18px;">
                 <li><a href="{{ route('home') }}" wire:navigate>Beranda</a></li>
