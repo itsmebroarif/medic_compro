@@ -142,12 +142,21 @@
                                 </div>
 
                                 <div class="d-flex justify-content-center justify-content-md-end mt-4">
-                                    <button type="submit" class="thm-btn" wire:loading.attr="disabled" style="min-width: 240px;">
-                                        <span wire:loading.remove><i class="fas fa-paper-plane"></i></span>
-                                        <span wire:loading><i class="fas fa-spinner fa-spin"></i></span>
-                                        <span wire:loading.remove>Kirim Janji Temu</span>
-                                        <span wire:loading>Mengirim...</span>
-                                    </button>
+                                    <button type="submit" 
+                                class="inline-flex items-center justify-center gap-3 px-6 py-3 bg-teal-700 hover:bg-teal-800 text-white font-semibold rounded-full shadow-md transition-all whitespace-nowrap">
+                                
+                                <!-- Lingkaran Icon -->
+                                <span class="flex items-center justify-center w-9 h-9 bg-blue-600 rounded-full shrink-0">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                                    </svg>
+                                </span>
+
+                                <!-- Teks Satu Baris -->
+                                <span class="tracking-wide text-sm uppercase">
+                                    Kirim Janji Temu
+                                </span>
+                            </button>
                                 </div>
                             </form>
                         </div>

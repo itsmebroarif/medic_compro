@@ -6,8 +6,8 @@
     <title>Login Admin | {{ config('app.name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" sizes="128x128" href="{{ asset('generated/favicon.png') }}" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.16.0/styles/overlayscrollbars.min.css" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ asset('generated/vendor/overlayscrollbars.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('generated/vendor/bootstrap-icons.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('template_admin/css/adminlte.css') }}" />
 </head>
 <body class="login-page bg-body-secondary">
