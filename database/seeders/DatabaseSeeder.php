@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Core\Services\MediaUploadService;
 use App\Domains\Appointment\Models\Appointment;
 use App\Domains\Content\Models\Article;
 use App\Domains\Content\Models\ArticleCategory;
@@ -17,6 +18,7 @@ use App\Domains\Visit\Models\InpatientVisit;
 use App\Domains\Visit\Models\OutpatientVisit;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
@@ -292,6 +294,46 @@ class DatabaseSeeder extends Seeder
                 'meta_description' => 'Pertanyaan yang sering diajukan seputar janji temu, BPJS, dan kunjungan rawat inap.',
                 'is_published' => true,
             ]);
+        }
+        // ===== 14. Foto Dokter & Thumbnail Artikel (dari aset lokal Unsplash, lisensi bebas) =====
+        $media = app(MediaUploadService::class);
+
+        $doctorPhotos = [
+            'dr. Rendra Wijaya, Sp.PD' => 'doctor-rendra-wijaya.jpg',
+            'dr. Bimo Aditama, Sp.JP' => 'doctor-bimo-aditama.jpg',
+            'dr. Fajar Ramadhan, Sp.M' => 'doctor-fajar-ramadhan.jpg',
+            'dr. Gilang Pratama, Sp.KG' => 'doctor-gilang-pratama.jpg',
+            'dr. Yoga Saputra, Sp.PD' => 'doctor-yoga-saputra.jpg',
+            'dr. Sinta Maharani, Sp.A' => 'doctor-sinta-maharani.jpg',
+            'dr. Laras Puspita, Sp.OG' => 'doctor-laras-puspita.jpg',
+            'dr. Dewi Anggraini, Sp.THT-KL' => 'doctor-dewi-anggraini.jpg',
+            'dr. Nadia Putri, Sp.B' => 'doctor-nadia-putri.jpg',
+            'dr. Amanda Kirana, Sp.A' => 'doctor-amanda-kirana.jpg',
+        ];
+
+        foreach ($doctorPhotos as $name => $file) {
+            $doctor = Doctor::query()->where('name', $name)->whereNull('photo')->first();
+            $source = public_path('generated/doctors/'.$file);
+            if ($doctor && is_file($source)) {
+                $doctor->update(['photo' => $media->storeAsWebp(new UploadedFile($source, $file, 'image/jpeg', null, true), 'doctors', maxWidth: 800, quality: 82)]);
+            }
+        }
+
+        $articleThumbnails = [
+            'Kenali Tanda-Tanda Serangan Jantung Sejak Dini' => 'article-1.jpg',
+            'Panduan Imunisasi Lengkap untuk Bayi dan Balita' => 'article-2.jpg',
+            '5 Kebiasaan Sederhana Menjaga Kesehatan Gigi dan Mulut' => 'article-3.jpg',
+            'RS Medika Service Raih Akreditasi Paripurna KARS' => 'article-4.jpg',
+            'Layanan MCU Korporat Kini Tersedia Setiap Sabtu' => 'article-5.jpg',
+            'Paket Persalinan Normal Mulai Rp 7,5 Juta' => 'article-6.jpg',
+        ];
+
+        foreach ($articleThumbnails as $title => $file) {
+            $article = Article::query()->where('title', $title)->whereNull('thumbnail')->first();
+            $source = public_path('generated/articles/'.$file);
+            if ($article && is_file($source)) {
+                $article->update(['thumbnail' => $media->storeAsWebp(new UploadedFile($source, $file, 'image/jpeg', null, true), 'articles', maxWidth: 1400, quality: 80)]);
+            }
         }
     }
 }

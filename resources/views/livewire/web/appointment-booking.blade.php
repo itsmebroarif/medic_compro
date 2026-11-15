@@ -1,5 +1,5 @@
 <div>
-    <section class="page-header" style="background-image: linear-gradient(rgba(9,39,58,.8), rgba(9,39,58,.8)), url('{{ asset('template_compro/assets/images/backgrounds/page-header-bg.jpg') }}'); background-size: cover; background-position: center; padding: 80px 0; text-align: center;">
+    <section class="page-header" style="background-image: linear-gradient(rgba(9,39,58,.8), rgba(9,39,58,.8)), url('{{ asset('generated/hero-hospital.jpg') }}'); background-size: cover; background-position: center; padding: 80px 0; text-align: center;">
         <div class="container">
             <h1 style="color: #fff; font-size: 2.4rem;">Janji Temu Online</h1>
             <p style="color: rgba(255,255,255,.8);"><a href="{{ route('home') }}" wire:navigate style="color: #ffc107; text-decoration: none;">Beranda</a> &nbsp;/&nbsp; Janji Temu</p>

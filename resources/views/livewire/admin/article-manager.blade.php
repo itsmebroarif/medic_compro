@@ -27,7 +27,7 @@
                 <tbody>
                     @forelse ($articles as $article)
                         <tr>
-                            <td><img src="{{ $article->thumbnailUrl() ?? asset('template_compro/assets/images/blog/blog-1-' . (($article->id % 6) + 1) . '.jpg') }}" alt="" style="width: 72px; height: 48px; object-fit: cover; border-radius: 6px;"></td>
+                            <td><img src="{{ $article->thumbnailUrl() ?? asset('generated/articles/article-' . (($article->id % 6) + 1) . '.jpg') }}" alt="" style="width: 72px; height: 48px; object-fit: cover; border-radius: 6px;"></td>
                             <td>
                                 <strong>{{ $article->title }}</strong><br>
                                 <span class="small text-muted">Oleh {{ $article->author?->name ?? '-' }}</span>

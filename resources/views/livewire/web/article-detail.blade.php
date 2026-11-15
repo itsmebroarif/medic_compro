@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    @php $fallback = 'template_compro/assets/images/blog/blog-1-' . (($article->id % 6) + 1) . '.jpg'; @endphp
+                    @php $fallback = 'generated/articles/article-' . (($article->id % 6) + 1) . '.jpg'; @endphp
                     <img src="{{ $article->thumbnailUrl() ?? asset($fallback) }}" alt="{{ $article->title }}" style="width: 100%; max-height: 420px; object-fit: cover; border-radius: 16px; margin-bottom: 24px;">
 
                     <ul class="list-unstyled d-flex flex-wrap gap-3 text-muted small mb-2">
@@ -32,7 +32,7 @@
                             <h5 style="font-weight: 700;">Artikel Terkait</h5>
                             <ul class="list-unstyled" style="margin-bottom: 0;">
                                 @foreach ($related as $item)
-                                    @php $relFallback = 'template_compro/assets/images/blog/blog-1-' . (($item->id % 6) + 1) . '.jpg'; @endphp
+                                    @php $relFallback = 'generated/articles/article-' . (($item->id % 6) + 1) . '.jpg'; @endphp
                                     <li class="d-flex gap-3 align-items-center" style="padding: 10px 0; border-bottom: 1px solid #eef0f3;">
                                         <img src="{{ $item->thumbnailUrl() ?? asset($relFallback) }}" alt="{{ $item->title }}" style="width: 84px; height: 64px; object-fit: cover; border-radius: 10px;">
                                         <a href="{{ route('articles.show', $item->slug) }}" wire:navigate style="text-decoration: none; color: inherit; font-weight: 600; line-height: 1.35;">{{ $item->title }}</a>

@@ -1,6 +1,6 @@
 @php use App\Domains\Content\Models\SiteSetting; @endphp
 <div>
-    <section class="page-header" style="background-image: linear-gradient(rgba(9,39,58,.8), rgba(9,39,58,.8)), url('{{ asset('template_compro/assets/images/backgrounds/page-header-bg.jpg') }}'); background-size: cover; background-position: center; padding: 80px 0; text-align: center;">
+    <section class="page-header" style="background-image: linear-gradient(rgba(9,39,58,.8), rgba(9,39,58,.8)), url('{{ asset('generated/hero-hospital.jpg') }}'); background-size: cover; background-position: center; padding: 80px 0; text-align: center;">
         <div class="container">
             <h1 style="color: #fff; font-size: 2.4rem;">Tentang Kami</h1>
             <p style="color: rgba(255,255,255,.8);"><a href="{{ route('home') }}" wire:navigate style="color: #ffc107; text-decoration: none;">Beranda</a> &nbsp;/&nbsp; Tentang</p>
@@ -11,7 +11,7 @@
         <div class="container">
             <div class="row align-items-center g-4">
                 <div class="col-lg-6">
-                    <img src="{{ asset('template_compro/assets/images/resources/about-one-img-1.jpg') }}" alt="Gedung rumah sakit" style="width: 100%; border-radius: 16px; box-shadow: 0 18px 45px rgba(9,39,58,.25);">
+                    <img src="{{ asset('generated/about-reception.jpg') }}" alt="Resepsionis RS Medika Service" style="width: 100%; border-radius: 16px; box-shadow: 0 18px 45px rgba(9,39,58,.25); object-fit: cover;">
                 </div>
                 <div class="col-lg-6">
                     <div class="section-title text-left">

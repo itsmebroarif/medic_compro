@@ -134,7 +134,10 @@ resources/views/
 
 - Template publik: **Mediplace** (themeforest) — aset pada `public/template_compro/`.
 - Template admin: **AdminLTE 4** (ColorlibHQ) — aset pada `public/template_admin/`.
-- Ikon & font mengikuti lisensi masing-masing template.
+- **Foto** (dokter, gedung, resepsionis, artikel): [Unsplash](https://unsplash.com) — lisensi bebas pakai, diunduh dan disimpan lokal di `public/generated/`.
+- **Logo & favicon** RS Medika Service dibuat khusus (lihat `scripts/generate-brand.php` dan `scripts/generate-placeholder.php`) — bebas dipakai ulang untuk presentasi.
+- Ikon: **Font Awesome Free** & **Bootstrap Icons**.
+- Catatan performa: navigasi publik/admin memakai `wire:navigate`; layout statis dibungkus `@persist`; gambar unggahan dikonversi ke `.webp`; `SiteSetting` di-cache permanen; container publik diperlebar (1560px/1740px) dan tipografi disesuaikan agar nyaman dibaca (lihat `public/generated/compro-overrides.css`).
 
 ---
 

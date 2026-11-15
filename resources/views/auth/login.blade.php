@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login Admin | {{ config('app.name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('template_compro/assets/images/favicons/favicon-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="128x128" href="{{ asset('generated/favicon.png') }}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.16.0/styles/overlayscrollbars.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('template_admin/css/adminlte.css') }}" />
@@ -13,7 +13,7 @@
 <body class="login-page bg-body-secondary">
 <div class="login-box">
     <div class="login-logo">
-        <a href="{{ route('home') }}"><b>{{ config('app.name') }}</b></a>
+        <a href="{{ route('home') }}"><img src="{{ asset('generated/logo-dark.png') }}" alt="{{ config('app.name') }}" style="height: 64px; width: auto;"></a>
     </div>
     <div class="card">
         <div class="card-body login-card-body">

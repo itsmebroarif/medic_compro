@@ -10,7 +10,7 @@
     <title>{{ $pageTitle }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('template_compro/assets/images/favicons/favicon-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="128x128" href="{{ asset('generated/favicon.png') }}" />
 
     <script>
         (() => {
@@ -80,7 +80,7 @@
     <aside class="app-sidebar bg-body-secondary shadow" data-bs-theme="dark">
         <div class="sidebar-brand">
             <a href="{{ route('admin.dashboard') }}" class="brand-link">
-                <img src="{{ asset('template_compro/assets/images/resources/logo-2.png') }}" alt="{{ $hospitalName }}" class="brand-image opacity-75 shadow" style="object-fit: contain; background: #fff; padding: 2px;" />
+                <img src="{{ asset('generated/favicon.png') }}" alt="{{ $hospitalName }}" class="brand-image opacity-75 shadow" style="object-fit: contain; background: #fff; padding: 2px; border-radius: 8px;" />
                 <span class="brand-text fw-light">{{ $hospitalName }}</span>
             </a>
         </div>

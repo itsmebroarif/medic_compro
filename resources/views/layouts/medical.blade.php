@@ -15,7 +15,7 @@
     <meta property="og:description" content="{{ $metaDesc }}">
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="{{ $hospitalName }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('template_compro/assets/images/favicons/favicon-32x32.png') }}" />
+    <link rel="icon" type="image/png" sizes="128x128" href="{{ asset('generated/favicon.png') }}" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,8 +32,20 @@
     <link rel="stylesheet" href="{{ asset('template_compro/assets/css/aos.css') }}" />
     <link rel="stylesheet" href="{{ asset('template_compro/assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('template_compro/assets/css/responsive.css') }}" />
+    <link rel="stylesheet" href="{{ asset('generated/compro-overrides.css') }}" />
+    @php
+        $hospitalLd = [
+            '@context' => 'https://schema.org',
+            '@type' => 'Hospital',
+            'name' => $hospitalName,
+            'address' => SiteSetting::get('address', 'Jl. Kesehatan Raya No. 1, Jakarta Selatan 12140'),
+            'telephone' => SiteSetting::get('igd_phone', '021 5550 1234'),
+            'url' => url('/'),
+        ];
+    @endphp
+    <script type="application/ld+json">{!! json_encode($hospitalLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) !!}</script>
 </head>
-<body class="custom-cursor">
+<body>
 
     <!-- Preloader -->
     <div class="loader js-preloader" id="preloader">
@@ -52,7 +64,7 @@
                         <div class="main-menu__wrapper-inner">
                             <div class="main-menu__logo">
                                 <a href="{{ route('home') }}" wire:navigate aria-label="{{ $hospitalName }}">
-                                    <img src="{{ asset('template_compro/assets/images/resources/logo-1.png') }}" alt="{{ $hospitalName }}">
+                                    <img src="{{ asset('generated/logo-dark.png') }}" alt="{{ $hospitalName }}" style="height: 46px; width: auto;">
                                 </a>
                             </div>
                             <div class="main-menu__main-menu-box-outer">
@@ -116,7 +128,7 @@
                             <div class="col-xl-4 col-lg-7 col-md-9">
                                 <div class="footer-widget__about">
                                     <div class="footer-widget__about-logo">
-                                        <a href="{{ route('home') }}" wire:navigate><img src="{{ asset('template_compro/assets/images/resources/logo-2.png') }}" alt="{{ $hospitalName }}" style="max-width: 180px;"></a>
+                                        <a href="{{ route('home') }}" wire:navigate><img src="{{ asset('generated/logo-light.png') }}" alt="{{ $hospitalName }}" style="height: 44px; width: auto;"></a>
                                     </div>
                                     <p class="footer-widget__about-text">{{ SiteSetting::get('about_short', 'Melayani dengan sepenuh hati, profesional, dan terpercaya untuk kesehatan Anda dan keluarga.') }}</p>
                                     <div class="footer-widget__social">
@@ -210,7 +222,7 @@
         <div class="mobile-nav__content">
             <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
             <div class="logo-box">
-                <a href="{{ route('home') }}" wire:navigate aria-label="{{ $hospitalName }}"><img src="{{ asset('template_compro/assets/images/resources/logo-2.png') }}" width="150" alt="{{ $hospitalName }}" /></a>
+                <a href="{{ route('home') }}" wire:navigate aria-label="{{ $hospitalName }}"><img src="{{ asset('generated/logo-light.png') }}" width="190" alt="{{ $hospitalName }}" /></a>
             </div>
             <ul class="mobile-nav__contact list-unstyled" style="padding: 0 30px;">
                 <li><i class="fa fa-envelope"></i><a href="mailto:{{ SiteSetting::get('email', 'info@medicservice.co.id') }}">{{ SiteSetting::get('email', 'info@medicservice.co.id') }}</a></li>

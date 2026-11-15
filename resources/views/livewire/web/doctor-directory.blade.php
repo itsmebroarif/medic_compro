@@ -1,6 +1,6 @@
 <div>
     {{-- Page Header --}}
-    <section class="page-header" style="background-image: linear-gradient(rgba(9,39,58,.8), rgba(9,39,58,.8)), url('{{ asset('template_compro/assets/images/backgrounds/page-header-bg.jpg') }}'); background-size: cover; background-position: center; padding: 80px 0; text-align: center;">
+    <section class="page-header" style="background-image: linear-gradient(rgba(9,39,58,.8), rgba(9,39,58,.8)), url('{{ asset('generated/hero-hospital.jpg') }}'); background-size: cover; background-position: center; padding: 80px 0; text-align: center;">
         <div class="container">
             <h1 style="color: #fff; font-size: 2.6rem; margin-bottom: 10px;">Direktori Dokter</h1>
             <p style="color: rgba(255,255,255,.8);"><a href="{{ route('home') }}" wire:navigate style="color: #ffc107; text-decoration: none;">Beranda</a> &nbsp;/&nbsp; Dokter</p>
@@ -49,7 +49,7 @@
                         <div class="team-two__single">
                             <div class="team-two__img-box">
                                 <div class="team-two__img">
-                                    <img src="{{ $doctor->photoUrl() ?? asset('template_compro/assets/images/team/team-page-v1-' . (($doctor->id % 12) + 1) . '.jpg') }}" alt="{{ $doctor->name }}" loading="lazy">
+                                    <img src="{{ $doctor->photoUrl() ?? asset('generated/doctor-placeholder.png') }}" alt="{{ $doctor->name }}" loading="lazy">
                                 </div>
                             </div>
                             <div class="team-two__content">
