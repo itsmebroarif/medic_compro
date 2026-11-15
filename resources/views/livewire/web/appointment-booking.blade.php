@@ -141,11 +141,14 @@
                                     </div>
                                 </div>
 
-                                <button type="submit" class="thm-btn w-100 mt-4" style="font-size: 1.05rem;" wire:loading.attr="disabled">
-                                    <span class="fas fa-paper-plane"></span>
-                                    <span wire:loading.remove>Kirim Pengajuan Janji Temu</span>
-                                    <span wire:loading>Mengirim...</span>
-                                </button>
+                                <div class="d-flex justify-content-center justify-content-md-end mt-4">
+                                    <button type="submit" class="thm-btn" wire:loading.attr="disabled" style="min-width: 240px;">
+                                        <span wire:loading.remove><i class="fas fa-paper-plane"></i></span>
+                                        <span wire:loading><i class="fas fa-spinner fa-spin"></i></span>
+                                        <span wire:loading.remove>Kirim Janji Temu</span>
+                                        <span wire:loading>Mengirim...</span>
+                                    </button>
+                                </div>
                             </form>
                         </div>
                     </div>
