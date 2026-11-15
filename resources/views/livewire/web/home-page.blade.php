@@ -55,26 +55,28 @@
             </div>
             <div class="row">
                 @php
+                    $svgAttrs = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"';
                     $poliIcons = [
-                        'umum' => 'fas fa-stethoscope',
-                        'anak' => 'fas fa-baby',
-                        'jantung' => 'fas fa-heartbeat',
-                        'kandungan' => 'fas fa-female',
-                        'mata' => 'fas fa-eye',
-                        'tht' => 'fas fa-ear-listen',
-                        'gigi' => 'fas fa-tooth',
-                        'bedah' => 'fas fa-user-md',
+                        'umum' => '<svg '.$svgAttrs.'><polyline points="22 12 16 12 14 15 10 9 8 12 2 12"/></svg>',
+                        'anak' => '<svg '.$svgAttrs.'><circle cx="12" cy="12" r="9"/><path d="M9.2 10h.01M14.8 10h.01"/><path d="M8.5 14s1.4 2.2 3.5 2.2 3.5-2.2 3.5-2.2"/></svg>',
+                        'jantung' => '<svg '.$svgAttrs.'><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.8l-1-1.2a5.5 5.5 0 1 0-7.8 7.8l8.8 8.8 8.8-8.8a5.5 5.5 0 0 0 0-7.8z"/></svg>',
+                        'kandungan' => '<svg '.$svgAttrs.'><circle cx="12" cy="7.5" r="4.5"/><path d="M12 12v9M8.5 17.5h7"/></svg>',
+                        'mata' => '<svg '.$svgAttrs.'><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>',
+                        'tht' => '<svg '.$svgAttrs.'><path d="M6.5 9a5.5 5.5 0 0 1 11 0c0 2-.8 3-2 4.2-1.2 1.3-1.8 2-1.8 3.8a3.7 3.7 0 0 1-7.4 0"/><path d="M9.8 8.8a2.8 2.8 0 0 1 4.7 1.5"/></svg>',
+                        'gigi' => '<svg '.$svgAttrs.'><path d="M7.5 3.5C5 3.5 3.6 5.6 3.6 8s1.5 3.6 2 6.4c.4 2.3.9 5.6 2.6 5.6 1.6 0 1.5-3.5 3.8-3.5s2.2 3.5 3.8 3.5c1.7 0 2.2-3.3 2.6-5.6.5-2.8 2-4.2 2-6.4s-1.4-4.5-3.9-4.5c-2.1 0-2.5 1.8-4.5 1.8s-2.4-1.8-4.5-1.8z"/></svg>',
+                        'bedah' => '<svg '.$svgAttrs.'><circle cx="12" cy="12" r="9"/><path d="M12 8.5v7M8.5 12h7"/></svg>',
                     ];
+                    $defaultIcon = '<svg '.$svgAttrs.'><path d="M4 21V6.5L12 3l8 3.5V21"/><path d="M2 21h20"/><path d="M12 10.5v4M10 12.5h4"/></svg>';
                 @endphp
                 @foreach ($this->departments as $department)
                     @php
                         $name = mb_strtolower($department->name);
-                        $icon = collect($poliIcons)->first(fn ($i, $key) => str_contains($name, $key), 'fas fa-hospital');
+                        $icon = collect($poliIcons)->first(fn ($i, $key) => str_contains($name, $key), $defaultIcon);
                     @endphp
                     <div class="col-xl-3 col-lg-4 col-md-6" style="margin-bottom: 22px;">
                         <a href="{{ route('doctors.index') }}?poli={{ $department->id }}" wire:navigate style="text-decoration: none; color: inherit;">
                             <div class="card h-100 text-center border-0 shadow-sm" style="border-radius: 16px; padding: 22px 14px;">
-                                <div class="poli-icon"><i class="{{ $icon }}"></i></div>
+                                <div class="poli-icon">{!! $icon !!}</div>
                                 <h5 style="font-weight: 700; font-size: 1.02rem;">{{ $department->name }}</h5>
                                 <p class="text-muted small mb-2">{{ $department->doctors_count }} dokter</p>
                                 <span class="text-primary small" style="font-weight: 600;">Lihat Dokter &rarr;</span>

@@ -210,29 +210,6 @@
 
     </div><!-- /.page-wrapper -->
 
-    <!-- Mobile Navigation -->
-    <div class="mobile-nav__wrapper">
-        <div class="mobile-nav__overlay mobile-nav__toggler"></div>
-        <div class="mobile-nav__content">
-            <span class="mobile-nav__close mobile-nav__toggler"><i class="fa fa-times"></i></span>
-            <div class="logo-box">
-                <a href="{{ route('home') }}" wire:navigate aria-label="{{ $hospitalName }}"><img src="{{ asset('generated/logo-light.png') }}" width="190" alt="{{ $hospitalName }}" /></a>
-            </div>
-            <ul class="mobile-nav__contact list-unstyled" style="padding: 0 30px;">
-                <li><i class="fa fa-envelope"></i><a href="mailto:{{ SiteSetting::get('email', 'info@medicservice.co.id') }}">{{ SiteSetting::get('email', 'info@medicservice.co.id') }}</a></li>
-                <li><i class="fas fa-phone"></i><a href="tel:{{ preg_replace('/\D/', '', SiteSetting::get('igd_phone', '085817048266')) }}">{{ SiteSetting::get('igd_phone', '0858 1704 8266') }}</a></li>
-            </ul>
-            <ul class="list-unstyled" style="padding: 0 30px; line-height: 2.4; font-size: 18px;">
-                <li><a href="{{ route('home') }}" wire:navigate>Beranda</a></li>
-                <li><a href="{{ route('about') }}" wire:navigate>Tentang Kami</a></li>
-                <li><a href="{{ route('doctors.index') }}" wire:navigate>Cari Dokter</a></li>
-                <li><a href="{{ route('articles.index') }}" wire:navigate>Artikel & Berita</a></li>
-                <li><a href="{{ route('appointment') }}" wire:navigate>Janji Temu</a></li>
-                <li><a href="{{ route('contact') }}" wire:navigate>Kontak</a></li>
-            </ul>
-        </div>
-    </div>
-
     <a href="#" data-target="html" class="scroll-to-target scroll-to-top" aria-label="Kembali ke atas">
         <span class="scroll-to-top__wrapper"><span class="scroll-to-top__inner"></span></span>
         <span class="scroll-to-top__text"> Go Back Top</span>
@@ -252,14 +229,22 @@
             }
         }
 
-        // Toggle mobile nav (delegated agar tetap bekerja setelah wire:navigate)
+        // Toggle menu mobile (absolute dropdown di bawah fixed navbar)
         document.addEventListener('click', function (e) {
-            const toggler = e.target.closest('.mobile-nav__toggler');
-            if (toggler) {
+            const burger = e.target.closest('#rsBurger');
+            if (burger) {
                 e.preventDefault();
-                const wrapper = document.querySelector('.mobile-nav__wrapper');
-                if (wrapper) wrapper.classList.toggle('expanded');
+                const panel = document.getElementById('rsMobilePanel');
+                if (panel) {
+                    panel.hidden = !panel.hidden;
+                    burger.setAttribute('aria-expanded', String(!panel.hidden));
+                }
                 return;
+            }
+            const panel = document.getElementById('rsMobilePanel');
+            if (panel && !panel.hidden && !e.target.closest('.rs-mobile-panel') && !e.target.closest('#rsBurger')) {
+                panel.hidden = true;
+                document.getElementById('rsBurger')?.setAttribute('aria-expanded', 'false');
             }
             const scrollTop = e.target.closest('.scroll-to-top');
             if (scrollTop) {
@@ -267,6 +252,39 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
+
+        // Sinkronkan status "aktif" menu navbar dengan halaman berjalan (setelah wire:navigate)
+        const NAV_MATCHERS = [
+            { prefix: '/tentang', key: 'about' },
+            { prefix: '/dokter', key: 'doctors.index' },
+            { prefix: '/artikel', key: 'articles.index' },
+            { prefix: '/kontak', key: 'contact' },
+            { prefix: '/', key: 'home', exact: true },
+        ];
+        function syncNavActive() {
+            let path = window.location.pathname.replace(/\/+$/, '');
+            if (path === '') path = '/';
+            document.querySelectorAll('.rs-menu a[href]').forEach(function (a) {
+                const url = new URL(a.getAttribute('href'), window.location.origin);
+                let p = url.pathname.replace(/\/+$/, '');
+                if (p === '') p = '/';
+                const match = path === p || (!NAV_MATCHERS.find(m => m.exact) && p !== '/' && path.startsWith(p + '/'));
+                a.classList.toggle('active', match);
+            });
+            document.querySelectorAll('.rs-mlink').forEach(function (a) {
+                const url = new URL(a.getAttribute('href'), window.location.origin);
+                let p = url.pathname.replace(/\/+$/, '');
+                if (p === '') p = '/';
+                const match = path === p || (p !== '/' && path.startsWith(p + '/'));
+                a.classList.toggle('active', match);
+            });
+            // tutup panel mobile setelah berpindah halaman
+            const panel = document.getElementById('rsMobilePanel');
+            if (panel) panel.hidden = true;
+            document.getElementById('rsBurger')?.setAttribute('aria-expanded', 'false');
+        }
+        document.addEventListener('DOMContentLoaded', syncNavActive);
+        document.addEventListener('livewire:navigated', syncNavActive);
 
         document.addEventListener('DOMContentLoaded', initTemplateUi);
         document.addEventListener('livewire:navigated', initTemplateUi);
