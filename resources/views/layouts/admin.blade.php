@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/overlayscrollbars@2.16.0/styles/overlayscrollbars.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" crossorigin="anonymous" />
     <link rel="stylesheet" href="{{ asset('template_admin/css/adminlte.css') }}" />
+    <link rel="stylesheet" href="{{ asset('generated/admin-overrides.css') }}" />
     <!-- Summernote (WYSIWYG Editor) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/summernote@0.9.2/dist/summernote-bs5.min.css" crossorigin="anonymous" />
 </head>

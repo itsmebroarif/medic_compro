@@ -108,6 +108,18 @@ body { padding-top: 72px; }
 .rs-mlink i { color: #94a3b8; font-size: .8rem; }
 .rs-mobile-panel .rs-mobile-cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
 
+/* ===== Ikon di dalam tombol solid: putih sedikit transparan ===== */
+.thm-btn:not(.thm-btn--white) i { color: rgba(255, 255, 255, .8); }
+.thm-btn:not(.thm-btn--white) i.fa,
+.thm-btn:not(.thm-btn--white) i.fas,
+.thm-btn:not(.thm-btn--white) i.fab { color: rgba(255, 255, 255, .8); }
+.btn-primary i,
+.btn-success i,
+.btn-danger i,
+.btn-info i,
+.btn-warning i,
+.btn-secondary i { opacity: .82; }
+
 /* ===== Buttons ===== */
 .thm-btn {
     display: inline-flex;

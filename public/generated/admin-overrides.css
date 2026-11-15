@@ -1,0 +1,41 @@
+/* RS Medika Service — Admin overrides */
+
+/* Ikon di dalam tombol solid: sedikit transparan */
+.btn-primary i,
+.btn-success i,
+.btn-danger i,
+.btn-info i,
+.btn-warning i,
+.btn-secondary i,
+.btn-dark i {
+    opacity: .82;
+}
+
+/* Tombol lebih rapih */
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: .01em;
+}
+.btn-primary {
+    background: #0d9488;
+    border-color: #0d9488;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+    background: #0f766e;
+    border-color: #0f766e;
+}
+.btn-outline-primary {
+    color: #0f766e;
+    border-color: #8ce0d5;
+}
+.btn-outline-primary:hover {
+    background: #e6fffa;
+    border-color: #0d9488;
+    color: #0f766e;
+}
+.btn-sm {
+    border-radius: 8px;
+    font-weight: 600;
+}
