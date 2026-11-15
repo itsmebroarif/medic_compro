@@ -108,6 +108,49 @@ body { padding-top: 72px; }
 .rs-mlink i { color: #94a3b8; font-size: .8rem; }
 .rs-mobile-panel .rs-mobile-cta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
 
+/* ===== Tombol submit Janji Temu (propsional, rapih) ===== */
+.thm-btn-submit {
+    gap: 14px;
+    padding: 10px 26px 10px 12px;
+    border-radius: 100px;
+    min-height: 56px;
+}
+.thm-btn-submit .btn-submit-icon {
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, .16);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform .25s ease;
+}
+.thm-btn-submit .btn-submit-icon i {
+    color: rgba(255, 255, 255, .85);
+    font-size: 1.02rem;
+}
+.thm-btn-submit .btn-submit-text {
+    font-size: .95rem;
+    font-weight: 700;
+    letter-spacing: .3px;
+    white-space: nowrap;
+}
+.thm-btn-submit:hover .btn-submit-icon {
+    transform: translateX(4px);
+}
+.thm-btn-submit:disabled {
+    opacity: .72;
+    cursor: not-allowed;
+    transform: none;
+}
+@media (max-width: 575.98px) {
+    .thm-btn-submit {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 /* ===== Ikon di dalam tombol solid: putih sedikit transparan ===== */
 .thm-btn:not(.thm-btn--white) i { color: rgba(255, 255, 255, .8); }
 .thm-btn:not(.thm-btn--white) i.fa,
